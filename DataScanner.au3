@@ -151,15 +151,15 @@ While 1
 						; Add or update team name in [Teams] table
 						_SQLite_GetTable2D(-1, "SELECT [TeamNumber], [TeamName] FROM [Teams] WHERE [TeamNumber] = " & $sTeamNumber, $aResult, $iRows, $iCols)
 						If $iRows > 0 Then
-							If $aResult[0][1] <> $sTeamName Then
-								If MsgBox(36, "Change team name?", "Team " & $sTeamNumber & " is already recorded with a name of " & $aResult[0][1] & ". Do you want to update their name to " & $sTeamName & "?") == 6 Then
+							If $aResult[1][1] <> $sTeamName Then
+								If MsgBox(36, "Change team name?", "Team " & $sTeamNumber & " is already recorded with a name of " & $aResult[1][1] & ". Do you want to update their name to " & $sTeamName & "?") == 6 Then
 									; Team name already recorded but they've chosen to update it.
 									_SQLite_Exec(-1, "UPDATE [Teams] SET [TeamName] = '" & $sTeamName & "' WHERE [TeamNumber] = " & $sTeamNumber)
 								EndIf
 							EndIf
 						Else
 							; Team name not already recorded. Add it.
-							_SQLite_Exec(-1, "INSERT INTO [Teams] ([TeamNumber], [TeamName]) VALUES (" & $sTeamNumber & ", '" & $sTeamName & "'")
+							_SQLite_Exec(-1, "INSERT INTO [Teams] ([TeamNumber], [TeamName]) VALUES (" & $sTeamNumber & ", '" & $sTeamName & "')")
 						EndIf
 
 						; See if the team number and match number match a record already in the database. If so, confirm they want to duplicate data.
