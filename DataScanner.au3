@@ -1,9 +1,10 @@
-#include <Json.au3>
+#include <includes\Json.au3>
 #include <SQLite.au3>
 
 #include <EditConstants.au3>
+#include <GuiListView.au3>
 
-FileInstall(@ScriptDir & "\SQLite3.dll", @TempDir & "\SQLite3.dll")
+FileInstall("includes\SQLite3.dll", @TempDir & "\SQLite3.dll")
 
 Global $hDB, $aColList, $sColListPath = @ScriptDir & "\DataList.txt"
 Global $aResult, $iRows, $iCols
@@ -36,14 +37,20 @@ If @error Then
         Exit
 EndIf
 
-; Create the UI
-Global $hGui = GUICreate("CocoNuts Scouting Data Entry", 320, 240)
+#Region; Create the UI
+Global $hGui = GUICreate("CocoNuts Scouting Data Entry", 320, 260)
 Global $hFileMenu = GUICtrlCreateMenu("File")
 Global $hNewMenu = GUICtrlCreateMenuItem("New", $hFileMenu)
 Global $hOpenMenu = GUICtrlCreateMenuItem("Open", $hFileMenu)
-Global $hStatusBar = GUICtrlCreateLabel("  No file open", 0, 200, 320, 20)
+
+Global $hMatchList = GUICtrlCreateListView("Team|Match|Comment", 0, 0, 320, 140)
+Global $hDeleteMatchRow = GUICtrlCreateButton("(delete selected)", 0, 140, 100, 20)
+
+Global $hAddDataButton = GUICtrlCreateButton("Add new match data >", 80, 170, 170, 40)
+
+Global $hStatusBar = GUICtrlCreateLabel("  No file open", 0, 220, 320, 20)
 GUICtrlSetBkColor(-1, 0xFFFFFF)
-Global $hAddDataButton = GUICtrlCreateButton("Add new match data", 70, 80, 170, 40)
+#EndRegion
 
 ;Now show the main UI and run the loop until it's closed.
 GUISetState()
@@ -76,6 +83,9 @@ While 1
 
 			; Indicate the file path of the new database in the status bar.
 			SetStatusBar($sNewDbPath)
+
+			; Show list of matches. Should be blank, but better safe than sorry.
+			UpdateMatchRowList()
 
 		Case $hOpenMenu ; File > Open
 			Local $sNewDbPath = FileOpenDialog("Open File", @WorkingDir, "Database Files (*.db)")
@@ -119,6 +129,9 @@ While 1
 
 			; Indicate the file path of the now-open database in the status bar.
 			SetStatusBar($sNewDbPath)
+
+			; Show a list of all [Matches] table records.
+			UpdateMatchRowList()
 
 		Case $hAddDataButton
 			If $hDB == '' Then
@@ -179,17 +192,27 @@ While 1
 							Next
 							$sQuery &= ")"
 
-							;ConsoleWrite($sQuery & @CRLF)
-
 							; Now run the query to store the data.
 							_SQLite_Exec(-1, $sQuery)
 						EndIf
 						ExitLoop
+
+						UpdateMatchRowList()
+
 				EndSwitch
 			WEnd
 
+		Case $hDeleteMatchRow
+			If MsgBox(36, "Are you sure?", "Are you sure you want to delete this record from the database?") == 7 Then ContinueLoop
+			Local $_values = StringSplit(GUICtrlRead(GUICtrlRead($hMatchList)), "|")
+			If $_values[0] == 4 Then
+				_SQLite_Exec(-1, "DELETE FROM [Matches] WHERE [TeamNumber] = " & $_values[1] & " AND [Match] = " & $_values[2] & " AND [Comment] LIKE '" & $_values[3] & "%'")
+				UpdateMatchRowList()
+			Else
+				MsgBox(16, "Error", "Oops- something went wrong trying to identify the row to delete")
+			EndIf
+
 	EndSwitch
-	Sleep(50)
 WEnd
 
 ; Function to update the status bar: first take the rightmost 50 characters, and then if there's a backslash strip everything to the left and prepend with '...'
@@ -215,6 +238,16 @@ EndFunc
 ; Function to get the property of a specific key from the indicated JSON string.
 Func GetEscapedJson($_string, $_key)
 	Return StringReplace(StringReplace(Json_ObjGet($_string, $_key), '\n', @CRLF), "'", "''")
+EndFunc
+
+; Function to update the [Matches] listing in the UI
+Func UpdateMatchRowList()
+	Local $_aResult, $_iRows, $_iCols
+	_GUICtrlListView_DeleteAllItems($hMatchList)
+	_SQLite_GetTable2D(-1, "SELECT [TeamNumber],[Match],[Comment] FROM [Matches]", $_aResult, $_iRows, $_iCols)
+	For $_i = 1 To $_iRows
+		GUICtrlCreateListViewItem($_aResult[$_i][0] & "|" & $_aResult[$_i][1] & "|" & $_aResult[$_i][2], $hMatchList)
+	Next
 EndFunc
 
 ; Call this function instead of Exit once the SQLite engine is running to make sure everything shuts down gracefully.

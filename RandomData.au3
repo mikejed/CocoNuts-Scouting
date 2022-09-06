@@ -23,7 +23,7 @@ Global $a_Teams[21][6] = [[1234, "lions", 0.1, 0, 0, 0] _
 						, [7777, "seeds", 0, 1, 0, 0] _
 						]
 Global $boolean[2] = ['true','false']
-_SQLite_Startup()
+_SQLite_Startup(@TempDir & "\SQLite3.dll")
 _SQLite_Open(@ScriptDir & "\data.db")
 
 Local $aResult, $iRows, $iCols

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2486 - Coconuts Scouting</title>
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="qrcode.min.js"></script>
+    <style>
+      body {
+        touch-action: manipulation;
+      }
+      dl dt {
+        float: left;
+        padding-right: 0.4em;
+        min-width: 7rem;
+        padding-top: 0.2rem;
+      }
+      dl dd {
+        padding-bottom: 0.2rem;
+      }
+      label {
+        font-weight: bold;
+      }
+      a.btn {
+        display: inline-block;
+        color: #fff;
+        font-weight: bold;
+        background-color: #999;
+        border: 0.05em solid #777;
+        border-radius: 0.05em;
+        padding: 0.4em;
+        text-decoration: none;
+      }
+      a.btn-touch {
+        font-size: 10vw;
+      }
+      a.btn-red {
+        background-color:#e44;
+        border-color: #b22;
+      }
+      a.btn-green {
+        background-color: #4c4;
+        border-color: #292;
+      }
+      #qrcode img {
+        display: inline-block !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <dl>
+        <dt><label for="TeamNumber-input">Team Number</label></dt>
+        <dd><input id="TeamNumber-input" type="number" /></dd>
+
+        <dt><label for="TeamName-input">Team Name</label></dt>
+        <dd><input id="TeamName-input" /></dd>
+      
+        <dt><label for="Match-input">Match</label></dt>
+        <dd><input id="Match-input" type="number" /></dd>
+
+        <dt><label for="DriveSkill-input">Driver Skill</label></dt>
+        <dd><input id="DriveSkill-input" type="range" min="1" max="5" /></dd>
+
+        <dt><label for="PrefStart-input">Starting Position</label></dt>
+        <dd><input id="PrefStart-input" type="number" /></dd>
+
+        <dt><strong>Compatible Autonomous</strong></dt>
+        <dd>
+          <input type="radio" id="CompatAuto-true" name="CompatAuto-input" value="true" />
+          <label for="CompatAuto-true">Yes</label>
+          <input type="radio" id="CompatAuto-false" name="CompatAuto-input" value="false" />
+          <label for="CompatAuto-false">No</label>
+        </dd>
+
+        <dt><strong>Preferred Driving Area</strong></dt>
+        <dd>
+          <input type="radio" id="PrefDrive-near" name="PrefDrive-input" value="near">
+          <label for="PrefDrive-near">Near</label>
+          <input type="radio" id="PrefDrive-mid" name="PrefDrive-input" value="mid">
+          <label for="PrefDrive-mid">Mid</label>
+          <input type="radio" id="PrefDrive-far" name="PrefDrive-input" value="far">
+          <label for="PrefDrive-far">Far</label>
+        </dd>
+
+        <dt><label for="PrefScore-input">Preferred Scoring Location</label></dt>
+        <dd><input id="PrefScore-input" /></dd>
+
+        <dt><label for="Aggression-input">Aggression Level</label></dt>
+        <dd><input id="Aggression-input" type="range" min="1" max="5" /></dd>
+
+        <dt><strong>Outlier match</strong></dt>
+        <dd>
+          <input type="radio" id="Outlier-true" name="Outlier-input" value="true" />
+          <label for="Outlier-true">Yes</label>
+          <input type="radio" id="Outlier-false" name="Outlier-input" value="false" checked />
+          <label for="Outlier-false">No</label>
+        </dd>
+
+        <dt><strong>Breakage affected match</strong></dt>
+        <dd>
+          <input type="radio" id="BreakImpact-true" name="BreakImpact-input" value="true" />
+          <label for="BreakImpact-true">Yes</label>
+          <input type="radio" id="BreakImpact-false" name="BreakImpact-input" value="false" checked />
+          <label for="BreakImpact-false">No</label>
+        </dd>
+
+      </dl>
+    </div>
+
+    <div style="text-align: center;">
+      <div>
+        <a href="javascript:changeValue($('#TargetsHigh-input'),-1)" class="btn btn-red btn-touch">-1</a>
+        <label for="TargetsHigh-input">High Targets</label>
+        <input id="TargetsHigh-input" value="0" />
+        <a href="javascript:changeValue($('#TargetsHigh-input'),1)" class="btn btn-green btn-touch">+1</a>
+      </div>
+      <div>
+        <a href="javascript:changeValue($('#TargetsLow-input'),-1)" class="btn btn-red btn-touch">-1</a>
+        <label for="TargetsLow-input">Low Targets</label>
+        <input id="TargetsLow-input" value="0" />
+        <a href="javascript:changeValue($('#TargetsLow-input'),1)" class="btn btn-green btn-touch">+1</a>
+      </div>
+    </div>
+
+    <dl>
+
+      <dt><strong>Climb</strong></dt>
+      <dd>
+        <input type="radio" id="Endgame-1" name="Endgame-input" value="4">
+        <label for="Endgame-1">Low</label>
+        <input type="radio" id="Endgame-2" name="Endgame-input" value="6">
+        <label for="Endgame-2">Mid</label>
+        <input type="radio" id="Endgame-3" name="Endgame-input" value="10">
+        <label for="Endgame-3">High</label>
+        <input type="radio" id="Endgame-4" name="Endgame-input" value="15">
+        <label for="Endgame-4">Transverse</label>
+      </dd>
+
+    </dl>
+
+    <label for="Comment-input">Comment</label><br>
+    <textarea id="Comment-input" style="width:50vw;height:6rem;"></textarea>
+
+    <div></div>
+
+    <a href="javascript:updateQR()" class="btn">Get Code</a>
+    <div style="text-align:center;" id="qrcode"></div>
+
+    <script type="text/javascript">
+      function changeValue(ctl,val) {
+        ctl.val( isNaN(parseInt(ctl.val())) ? 1 : parseInt(ctl.val()) + val );
+        if (ctl.val() < 0) {ctl.val("0")}
+      }
+      function updateQR() {
+        // TODO: validate required fields
+        // var data='{
+        //           "TeamNumber":2486
+        //          ,"TeamName":"Coconuts"
+        //          ,"Match":"interview"
+        //          ,"PrefStart":1
+        //          ,"PrefDrive":"far"
+        //          ,"PrefScore":"2"
+        //          ,"compatAuto":true
+        //          ,"DriveSkill":4
+        //          ,"TargetsHigh":8
+        //          ,"TargetsLow":0
+        //          ,"Endgame":15
+        //          ,"Aggression":2
+        //          ,"Outlier":false
+        //          ,"BreakImpact":false
+        //          ,"Comment":"This could be a very long description of this round, etc."
+        //          }';
+        var data= '{'
+                + '"TeamNumber":'   + JSON.stringify($("#TeamNumber-input").val())
+                + ',"TeamName":'    + JSON.stringify($("#TeamName-input").val())
+                + ',"Match":'       + JSON.stringify($("#Match-input").val())           // TODO: add option for interview data
+                + ',"PrefStart":'   + JSON.stringify($("#PrefStart-input").val())
+                + ',"PrefDrive":'   + JSON.stringify($("input[name='PrefDrive-input']:checked").val())
+                + ',"PrefScore":'   + JSON.stringify($("#PrefScore-input").val())
+                + ',"CompatAuto":'  + JSON.stringify($("input[name='CompatAuto-input']:checked").val())
+                + ',"DriveSkill":'  + JSON.stringify($("#DriveSkill-input").val())
+                + ',"Aggression":'  + JSON.stringify($("#Aggression-input").val())
+                + ',"Outlier":'     + JSON.stringify($("input[name='Outlier-input']:checked").val())
+                + ',"BreakImpact":' + JSON.stringify($("input[name='BreakImpact-input']:checked").val())
+                + ',"TargetsHigh":' + JSON.stringify($("#TargetsHigh-input").val())
+                + ',"TargetsLow":'  + JSON.stringify($("#TargetsLow-input").val())
+                + ',"Endgame":'     + JSON.stringify($("input[name='Endgame-input']:checked").val())
+                + ',"Comment":'     + JSON.stringify($("#Comment-input").val())
+                + '}';
+        $("#qrcode").html(""); // clear the QR div's previous content
+        new QRCode(document.getElementById("qrcode"), {text:data,width:320,height:320});
+      }
+    </script>
+  </body>
+</html>
