@@ -4,42 +4,26 @@
     <title>2486 - Coconuts Scouting</title>
     <script src="jquery-3.6.1.min.js"></script>
     <script src="qrcode.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
     <style>
       body {
         touch-action: manipulation;
       }
-      dl dt {
-        float: left;
-        padding-right: 0.4em;
-        min-width: 7rem;
-        padding-top: 0.2rem;
-      }
-      dl dd {
-        padding-bottom: 0.2rem;
-      }
       label {
         font-weight: bold;
+        margin-top: 1rem;
       }
-      a.btn {
-        display: inline-block;
-        color: #fff;
-        font-weight: bold;
-        background-color: #999;
-        border: 0.05em solid #777;
-        border-radius: 0.05em;
-        padding: 0.4em;
-        text-decoration: none;
+      .form-label {
+        margin-bottom: 0.1rem;
       }
-      a.btn-touch {
-        font-size: 10vw;
+      .form-check label {
+        font-weight: normal;
+        margin-top: auto;
       }
-      a.btn-red {
-        background-color:#e44;
-        border-color: #b22;
-      }
-      a.btn-green {
-        background-color: #4c4;
-        border-color: #292;
+      .btn-huge {
+        --bs-btn-padding-y: 5rem;
+        --bs-btn-padding-x: 5rem;
+        --bs-btn-font-size: 7.5rem;
       }
       #qrcode img {
         display: inline-block !important;
@@ -47,104 +31,155 @@
     </style>
   </head>
   <body>
-    <div>
-      <dl>
-        <dt><label for="TeamNumber-input">Team Number</label></dt>
-        <dd><input id="TeamNumber-input" type="number" /></dd>
+    <div class="container">
+      <div class="row">
 
-        <dt><label for="TeamName-input">Team Name</label></dt>
-        <dd><input id="TeamName-input" /></dd>
-      
-        <dt><label for="Match-input">Match</label></dt>
-        <dd><input id="Match-input" type="number" /></dd>
+        <div class="col">
+          <label for="TeamNumber-input" class="form-label">Team Number</label>
+          <input type="number" class="form-control" id="TeamNumber-input">
+        </div>
 
-        <dt><label for="DriveSkill-input">Driver Skill</label></dt>
-        <dd><input id="DriveSkill-input" type="range" min="1" max="5" /></dd>
+        <div class="col">
+          <label for="TeamName-input" class="form-label">Team Name</label>
+          <input type="text" class="form-control" id="TeamName-input">
+        </div>
 
-        <dt><label for="PrefStart-input">Starting Position</label></dt>
-        <dd><input id="PrefStart-input" type="number" /></dd>
+        <div class="col">
+          <label for="Match-input" class="form-label">Match</label>
+          <input type="number" class="form-control" id="Match-input">
+        </div>
 
-        <dt><strong>Compatible Autonomous</strong></dt>
-        <dd>
-          <input type="radio" id="CompatAuto-true" name="CompatAuto-input" value="true" />
-          <label for="CompatAuto-true">Yes</label>
-          <input type="radio" id="CompatAuto-false" name="CompatAuto-input" value="false" />
-          <label for="CompatAuto-false">No</label>
-        </dd>
+      </div><!-- /.row -->
 
-        <dt><strong>Preferred Driving Area</strong></dt>
-        <dd>
-          <input type="radio" id="PrefDrive-near" name="PrefDrive-input" value="near">
-          <label for="PrefDrive-near">Near</label>
-          <input type="radio" id="PrefDrive-mid" name="PrefDrive-input" value="mid">
-          <label for="PrefDrive-mid">Mid</label>
-          <input type="radio" id="PrefDrive-far" name="PrefDrive-input" value="far">
-          <label for="PrefDrive-far">Far</label>
-        </dd>
+      <hr class="mt-4 mb-1">
 
-        <dt><label for="PrefScore-input">Preferred Scoring Location</label></dt>
-        <dd><input id="PrefScore-input" /></dd>
+      <div class="row">
+        <div class="col">
 
-        <dt><label for="Aggression-input">Aggression Level</label></dt>
-        <dd><input id="Aggression-input" type="range" min="1" max="5" /></dd>
+          <label for="PrefStart-input" class="form-label">Starting Position</label>
+          <input type="number" class="form-control" id="PrefStart-input">
 
-        <dt><strong>Outlier match</strong></dt>
-        <dd>
-          <input type="radio" id="Outlier-true" name="Outlier-input" value="true" />
-          <label for="Outlier-true">Yes</label>
-          <input type="radio" id="Outlier-false" name="Outlier-input" value="false" checked />
-          <label for="Outlier-false">No</label>
-        </dd>
+          <label class="form-check-label" for="CompatAuto-input">Compatible Autonomous</label>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="CompatAuto-input">
+          </div>
 
-        <dt><strong>Breakage affected match</strong></dt>
-        <dd>
-          <input type="radio" id="BreakImpact-true" name="BreakImpact-input" value="true" />
-          <label for="BreakImpact-true">Yes</label>
-          <input type="radio" id="BreakImpact-false" name="BreakImpact-input" value="false" checked />
-          <label for="BreakImpact-false">No</label>
-        </dd>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label for="DriveSkill-input" class="form-label">Driving Skill</label>
+              <input type="range" class="form-range" id="DriveSkill-input" min="1" max="5">
+            </div>
+            <div class="col">
+              <label for="Aggression-input" class="form-label">Aggression</label>
+              <input type="range" class="form-range" id="Aggression-input" min="1" max="5">
+            </div>
+          </div>
 
-      </dl>
-    </div>
+          <label for="PrefDrive-input" class="form-label">Preferred Driving Area</label>
+          <input type="number" class="form-control" id="PrefDrive-input">
 
-    <div style="text-align: center;">
-      <div>
-        <a href="javascript:changeValue($('#TargetsHigh-input'),-1)" class="btn btn-red btn-touch">-1</a>
-        <label for="TargetsHigh-input">High Targets</label>
-        <input id="TargetsHigh-input" value="0" />
-        <a href="javascript:changeValue($('#TargetsHigh-input'),1)" class="btn btn-green btn-touch">+1</a>
-      </div>
-      <div>
-        <a href="javascript:changeValue($('#TargetsLow-input'),-1)" class="btn btn-red btn-touch">-1</a>
-        <label for="TargetsLow-input">Low Targets</label>
-        <input id="TargetsLow-input" value="0" />
-        <a href="javascript:changeValue($('#TargetsLow-input'),1)" class="btn btn-green btn-touch">+1</a>
-      </div>
-    </div>
+          <label for="PrefScore-input" class="form-label">Preferred Scoring Area</label>
+          <input type="number" class="form-control" id="PrefScore-input">
 
-    <dl>
+        </div>
+        
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Endgame</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-1" value="6">
+                <label class="form-check-label" for="Endgame-1">
+                  Low
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-2" value="8">
+                <label class="form-check-label" for="Endgame-2">
+                  Mid
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-3" value="10">
+                <label class="form-check-label" for="Endgame-3">
+                  High
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-4" value="15">
+                <label class="form-check-label" for="Endgame-4">
+                  Traverse
+                </label>
+              </div>
+            </div>
+            <div class="col">
 
-      <dt><strong>Climb</strong></dt>
-      <dd>
-        <input type="radio" id="Endgame-1" name="Endgame-input" value="4">
-        <label for="Endgame-1">Low</label>
-        <input type="radio" id="Endgame-2" name="Endgame-input" value="6">
-        <label for="Endgame-2">Mid</label>
-        <input type="radio" id="Endgame-3" name="Endgame-input" value="10">
-        <label for="Endgame-3">High</label>
-        <input type="radio" id="Endgame-4" name="Endgame-input" value="15">
-        <label for="Endgame-4">Transverse</label>
-      </dd>
+              <label class="form-check-label" for="Outlier-input">Outlier</label>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="Outlier-input">
+              </div>
+              
+              <label class="form-check-label" for="BreakImpact-input">Break Impact</label>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="BreakImpact-input">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.row -->
 
-    </dl>
+      <hr>
 
-    <label for="Comment-input">Comment</label><br>
-    <textarea id="Comment-input" style="width:50vw;height:6rem;"></textarea>
+      <div class="row align-items-center">
+        <div class="col">
+          <a class="btn btn-danger btn-huge form-control">-1</a>
+        </div>
+        <div class="col">
+          <label for="TargetsHigh-input" class="form-label">High Targets</label>
+          <input type="number" class="form-control" id="TargetsHigh-input">
+        </div>
+        <div class="col">
+            <a class="btn btn-success btn-huge form-control">+1</a>
+        </div>
+      </div><!-- /.row -->
 
-    <div></div>
+      <hr>
 
-    <a href="javascript:updateQR()" class="btn">Get Code</a>
-    <div style="text-align:center;" id="qrcode"></div>
+      <div class="row align-items-center">
+        <div class="col">
+          <a class="btn btn-danger btn-huge form-control">-1</a>
+        </div>
+        <div class="col">
+          <label for="TargetsLow-input" class="form-label">Low Targets</label>
+          <input type="number" class="form-control" id="TargetsLow-input">
+        </div>
+        <div class="col">
+            <a class="btn btn-success btn-huge form-control">+1</a>
+        </div>
+      </div><!-- /.row -->
+
+      <hr>
+
+      <div class="row justify-content-md-center">
+        <div class="col-md-4">
+          <label class="form-label" for="Comment-input">Comment</label>
+          <textarea class="form-control" id="Comment-input"></textarea>
+        </div>
+      </div><!-- /.row -->
+
+      <div class="row">
+        <a href="javascript:updateQR()" class="btn btn-primary">Get Code</a>
+      </div><!-- /.row -->
+
+      <div class="row">
+        <div class="col">
+          <div id="qrcode"></div>
+        </div>
+      </div><!-- /.row -->
+
+    </div><!-- /.container-->
 
     <script type="text/javascript">
       function changeValue(ctl,val) {
@@ -175,13 +210,13 @@
                 + ',"TeamName":'    + JSON.stringify($("#TeamName-input").val())
                 + ',"Match":'       + JSON.stringify($("#Match-input").val())           // TODO: add option for interview data
                 + ',"PrefStart":'   + JSON.stringify($("#PrefStart-input").val())
-                + ',"PrefDrive":'   + JSON.stringify($("input[name='PrefDrive-input']:checked").val())
+                + ',"PrefDrive":'   + JSON.stringify($("#PrefDrive-input").val())
                 + ',"PrefScore":'   + JSON.stringify($("#PrefScore-input").val())
-                + ',"CompatAuto":'  + JSON.stringify($("input[name='CompatAuto-input']:checked").val())
+                + ',"CompatAuto":'  + JSON.stringify(Number($("#CompatAuto-input").is(":checked")))
                 + ',"DriveSkill":'  + JSON.stringify($("#DriveSkill-input").val())
                 + ',"Aggression":'  + JSON.stringify($("#Aggression-input").val())
-                + ',"Outlier":'     + JSON.stringify($("input[name='Outlier-input']:checked").val())
-                + ',"BreakImpact":' + JSON.stringify($("input[name='BreakImpact-input']:checked").val())
+                + ',"Outlier":'     + JSON.stringify(Number($("#Outlier-input").is(":checked")))
+                + ',"BreakImpact":' + JSON.stringify(Number($("#BreakImpact-input").is(":checked")))
                 + ',"TargetsHigh":' + JSON.stringify($("#TargetsHigh-input").val())
                 + ',"TargetsLow":'  + JSON.stringify($("#TargetsLow-input").val())
                 + ',"Endgame":'     + JSON.stringify($("input[name='Endgame-input']:checked").val())
