@@ -164,7 +164,7 @@ While 1
 						; Add or update team name in [Teams] table
 						_SQLite_GetTable2D(-1, "SELECT [TeamNumber], [TeamName] FROM [Teams] WHERE [TeamNumber] = " & $sTeamNumber, $aResult, $iRows, $iCols)
 						If $iRows > 0 Then
-							If $aResult[1][1] <> $sTeamName Then
+							If $aResult[1][1] <> $sTeamName And $sTeamName <> "" Then
 								If MsgBox(36, "Change team name?", "Team " & $sTeamNumber & " is already recorded with a name of " & $aResult[1][1] & ". Do you want to update their name to " & $sTeamName & "?") == 6 Then
 									; Team name already recorded but they've chosen to update it.
 									_SQLite_Exec(-1, "UPDATE [Teams] SET [TeamName] = '" & $sTeamName & "' WHERE [TeamNumber] = " & $sTeamNumber)
