@@ -27,8 +27,16 @@
       }
       #qrcode img {
         display: inline-block !important;
+        margin: 2rem 0rem;
       }
     </style>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+        .register("sw.js")
+        .then(() => console.log("Successfully registered service worker"));
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -36,7 +44,10 @@
 
         <div class="col">
           <label for="TeamNumber-input" class="form-label">Team Number</label>
-          <input type="number" class="form-control" id="TeamNumber-input">
+          <input type="number" class="form-control" id="TeamNumber-input" min="1" required>
+          <div class="invalid-feedback">
+            Please set the team number.
+          </div>
         </div>
 
         <div class="col">
@@ -46,7 +57,10 @@
 
         <div class="col">
           <label for="Match-input" class="form-label">Match</label>
-          <input type="number" class="form-control" id="Match-input">
+          <input type="number" class="form-control" id="Match-input" min="1" required>
+          <div class="invalid-feedback">
+            Please set the match number.
+          </div>
         </div>
 
       </div><!-- /.row -->
@@ -57,7 +71,25 @@
         <div class="col">
 
           <label for="PrefStart-input" class="form-label">Starting Position</label>
-          <input type="number" class="form-control" id="PrefStart-input">
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-1" value="1" required>
+            <label class="form-check-label" for="PrefStart-1">
+              Position 1
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-2" value="2" required>
+            <label class="form-check-label" for="PrefStart-2">
+              Position 2
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-3" value="3" required>
+            <label class="form-check-label" for="PrefStart-3">
+              Position 3
+            </label>
+          </div>
 
           <label class="form-check-label" for="CompatAuto-input">Compatible Autonomous</label>
           <div class="form-check form-switch">
@@ -77,12 +109,50 @@
             </div>
           </div>
 
-          <label for="PrefDrive-input" class="form-label">Preferred Driving Area</label>
-          <input type="number" class="form-control" id="PrefDrive-input">
-
-          <label for="PrefScore-input" class="form-label">Preferred Scoring Area</label>
-          <input type="number" class="form-control" id="PrefScore-input">
-
+          <div class="row">
+            <div class="col">
+              <label for="PrefDrive-input" class="form-label">Preferred Driving Area</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-1" value="1" required>
+                <label class="form-check-label" for="PrefDrive-1">
+                  Near
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-2" value="2" required>
+                <label class="form-check-label" for="PrefDrive-2">
+                  Mid
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-3" value="3" required>
+                <label class="form-check-label" for="PrefDrive-3">
+                  Far
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <label for="PrefScore-input" class="form-label">Preferred Scoring Area</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-1" value="1" required>
+                <label class="form-check-label" for="PrefScore-1">
+                  Close
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-2" value="2" required>
+                <label class="form-check-label" for="PrefScore-2">
+                  Medium
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-3" value="3" required>
+                <label class="form-check-label" for="PrefScore-3">
+                  Distant
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div class="col">
@@ -90,25 +160,31 @@
             <div class="col">
               <label>Endgame</label>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-1" value="6">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-0" value="0" required>
+                <label class="form-check-label" for="Endgame-0">
+                  No climb
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-1" value="6" required>
                 <label class="form-check-label" for="Endgame-1">
                   Low
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-2" value="8">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-2" value="8" required>
                 <label class="form-check-label" for="Endgame-2">
                   Mid
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-3" value="10">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-3" value="10" required>
                 <label class="form-check-label" for="Endgame-3">
                   High
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-4" value="15">
+                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-4" value="15" required>
                 <label class="form-check-label" for="Endgame-4">
                   Traverse
                 </label>
@@ -138,7 +214,10 @@
         </div>
         <div class="col">
           <label for="TargetsHigh-input" class="form-label">High Targets</label>
-          <input type="number" class="form-control" id="TargetsHigh-input">
+          <input type="number" class="form-control" id="TargetsHigh-input" min="0" value="0" required>
+          <div class="invalid-feedback">
+            Please set how many points from the high target.
+          </div>
         </div>
         <div class="col">
             <a class="btn btn-success btn-huge form-control" href="javascript:changeValue($('#TargetsHigh-input'),1)">+1</a>
@@ -153,7 +232,10 @@
         </div>
         <div class="col">
           <label for="TargetsLow-input" class="form-label">Low Targets</label>
-          <input type="number" class="form-control" id="TargetsLow-input">
+          <input type="number" class="form-control" id="TargetsLow-input" min="0" value="0" required>
+          <div class="invalid-feedback">
+            Please set how many points in the low target.
+          </div>
         </div>
         <div class="col">
             <a class="btn btn-success btn-huge form-control" href="javascript:changeValue($('#TargetsLow-input'),1)">+1</a>
@@ -162,19 +244,14 @@
 
       <hr>
 
-      <div class="row justify-content-md-center">
-        <div class="col-md-4">
-          <label class="form-label" for="Comment-input">Comment</label>
-          <textarea class="form-control" id="Comment-input"></textarea>
-        </div>
-      </div><!-- /.row -->
-
-      <div class="row">
-        <a href="javascript:updateQR()" class="btn btn-primary">Get Code</a>
-      </div><!-- /.row -->
-
       <div class="row">
         <div class="col">
+          <label class="form-label" for="Comment-input">Comment</label>
+          <textarea class="form-control" id="Comment-input" rows="6"></textarea>
+        </div>
+
+        <div class="col text-center">
+          <a href="javascript:updateQR()" class="btn btn-primary form-control" style="margin-top: 2.5rem;">Get Code</a>
           <div id="qrcode"></div>
         </div>
       </div><!-- /.row -->
@@ -187,43 +264,29 @@
         if (ctl.val() < 0) {ctl.val("0")}
       }
       function updateQR() {
-        // TODO: validate required fields
-        // var data='{
-        //           "TeamNumber":2486
-        //          ,"TeamName":"Coconuts"
-        //          ,"Match":"interview"
-        //          ,"PrefStart":1
-        //          ,"PrefDrive":"far"
-        //          ,"PrefScore":"2"
-        //          ,"compatAuto":true
-        //          ,"DriveSkill":4
-        //          ,"TargetsHigh":8
-        //          ,"TargetsLow":0
-        //          ,"Endgame":15
-        //          ,"Aggression":2
-        //          ,"Outlier":false
-        //          ,"BreakImpact":false
-        //          ,"Comment":"This could be a very long description of this round, etc."
-        //          }';
-        var data= '{'
-                + '"TeamNumber":'   + JSON.stringify($("#TeamNumber-input").val())
-                + ',"TeamName":'    + JSON.stringify($("#TeamName-input").val())
-                + ',"Match":'       + JSON.stringify($("#Match-input").val())           // TODO: add option for interview data
-                + ',"PrefStart":'   + JSON.stringify($("#PrefStart-input").val())
-                + ',"PrefDrive":'   + JSON.stringify($("#PrefDrive-input").val())
-                + ',"PrefScore":'   + JSON.stringify($("#PrefScore-input").val())
-                + ',"CompatAuto":'  + JSON.stringify(Number($("#CompatAuto-input").is(":checked")))
-                + ',"DriveSkill":'  + JSON.stringify($("#DriveSkill-input").val())
-                + ',"Aggression":'  + JSON.stringify($("#Aggression-input").val())
-                + ',"Outlier":'     + JSON.stringify(Number($("#Outlier-input").is(":checked")))
-                + ',"BreakImpact":' + JSON.stringify(Number($("#BreakImpact-input").is(":checked")))
-                + ',"TargetsHigh":' + JSON.stringify($("#TargetsHigh-input").val())
-                + ',"TargetsLow":'  + JSON.stringify($("#TargetsLow-input").val())
-                + ',"Endgame":'     + JSON.stringify($("input[name='Endgame-input']:checked").val())
-                + ',"Comment":'     + JSON.stringify($("#Comment-input").val())
-                + '}';
+        $('body').addClass('was-validated');
         $("#qrcode").html(""); // clear the QR div's previous content
-        new QRCode(document.getElementById("qrcode"), {text:data,width:320,height:320});
+        alert($("input[Name='Endgame-input']:valid").length)
+        if ($('#TeamNumber-input:valid').length > 0 && $('#Match-input:valid').length > 0 && $("input[Name='PrefStart-input']:valid").length > 0 && $("input[Name='PrefDrive-input']:valid").length > 0 && $("input[Name='PrefScore-input']:valid").length > 0 && $("input[Name='Endgame-input']:valid").length > 0 ) {
+          var data= '{'
+                  + '"TeamNumber":'   + JSON.stringify($("#TeamNumber-input").val())
+                  + ',"TeamName":'    + JSON.stringify($("#TeamName-input").val())
+                  + ',"Match":'       + JSON.stringify($("#Match-input").val())           // TODO: add option for interview data
+                  + ',"PrefStart":'   + JSON.stringify($("input[name='PrefStart-input']:checked").val())
+                  + ',"PrefDrive":'   + JSON.stringify($("input[name='PrefDrive-input']:checked").val())
+                  + ',"PrefScore":'   + JSON.stringify($("input[name='PrefScore-input']:checked").val())
+                  + ',"CompatAuto":'  + JSON.stringify(Number($("#CompatAuto-input").is(":checked")))
+                  + ',"DriveSkill":'  + JSON.stringify($("#DriveSkill-input").val())
+                  + ',"Aggression":'  + JSON.stringify($("#Aggression-input").val())
+                  + ',"Outlier":'     + JSON.stringify(Number($("#Outlier-input").is(":checked")))
+                  + ',"BreakImpact":' + JSON.stringify(Number($("#BreakImpact-input").is(":checked")))
+                  + ',"TargetsHigh":' + JSON.stringify($("#TargetsHigh-input").val())
+                  + ',"TargetsLow":'  + JSON.stringify($("#TargetsLow-input").val())
+                  + ',"Endgame":'     + JSON.stringify($("input[name='Endgame-input']:checked").val())
+                  + ',"Comment":'     + JSON.stringify($("#Comment-input").val())
+                  + '}';
+          new QRCode(document.getElementById("qrcode"), {text:data,width:480,height:480});
+        }
       }
     </script>
   </body>
