@@ -1,5 +1,5 @@
 const cacheName = "CocoNutsScouting";
-const ASSETS = [
+const precacheResources = [
     "/CocoNuts-Scouting/Data%20Entry/scoring-sheet.html",
     "/CocoNuts-Scouting/Data%20Entry/qrcode.min.js",
     "/CocoNuts-Scouting/Data%20Entry/bootstrap.min.css",
