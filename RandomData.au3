@@ -75,14 +75,14 @@ For $round = 1 To 28 Step 1
 						", '" & Random(1,3,1) & "'" & _
 						", '" & Random(1,3,1) & "'" & _
 						", '" & Random(1,3,1) & "'" & _
-						", '" & $boolean[Random(0,1,1)] & "'" & _
+						", '" & Random(0,1,1) & "'" & _
 						", '" & Random(1,5,1) & "'" & _
 						", '" & $a_Teams[$team][4] & "'" & _
 						", '" & Round(0.15 * $a_Teams[$team][4]) & "'" & _
 						", '" & GetEndgame($a_Teams[$team][4]) & "'" & _
 						", '" & Random(1,5,1) & "'" & _
-						", '" & $boolean[Random(0,1,1)] & "'" & _
-						", '" & $boolean[Random(0,1,1)] & "'" & _
+						", '" & Random(0,1,1) & "'" & _
+						", '" & Random(0,1,1) & "'" & _
 						", 'There were " & Random(0, 20, 1) & " " & $a_Teams[Random(0,20,1)][1] & " members yelling this round.'" & _
 						")" _
 		)
