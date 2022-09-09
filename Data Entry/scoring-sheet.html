@@ -266,7 +266,6 @@
       function updateQR() {
         $('body').addClass('was-validated');
         $("#qrcode").html(""); // clear the QR div's previous content
-        alert($("input[Name='Endgame-input']:valid").length)
         if ($('#TeamNumber-input:valid').length > 0 && $('#Match-input:valid').length > 0 && $("input[Name='PrefStart-input']:valid").length > 0 && $("input[Name='PrefDrive-input']:valid").length > 0 && $("input[Name='PrefScore-input']:valid").length > 0 && $("input[Name='Endgame-input']:valid").length > 0 ) {
           var data= '{'
                   + '"TeamNumber":'   + JSON.stringify($("#TeamNumber-input").val())
