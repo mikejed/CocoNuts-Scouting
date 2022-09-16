@@ -39,224 +39,231 @@
     </script>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-
-        <div class="col">
-          <label for="TeamNumber-input" class="form-label">Team Number</label>
-          <input type="number" class="form-control" id="TeamNumber-input" min="1" required>
-          <div class="invalid-feedback">
-            Please set the team number.
+    <form>
+      <div class="container">
+        <div class="row">
+          <div class="col text-end">
+            <input type="reset" value="Reset all fields" onClick="javascript:$('body').removeClass('was-validated');">
           </div>
         </div>
+        <div class="row">
 
-        <div class="col">
-          <label for="TeamName-input" class="form-label">Team Name</label>
-          <input type="text" class="form-control" id="TeamName-input">
-        </div>
-
-        <div class="col">
-          <label for="Match-input" class="form-label">Match</label>
-          <input type="number" class="form-control" id="Match-input" min="1" required>
-          <div class="invalid-feedback">
-            Please set the match number.
-          </div>
-        </div>
-
-      </div><!-- /.row -->
-
-      <hr class="mt-4 mb-1">
-
-      <div class="row">
-        <div class="col">
-
-          <label for="PrefStart-input" class="form-label">Starting Position</label>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-1" value="1" required>
-            <label class="form-check-label" for="PrefStart-1">
-              Position 1
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-2" value="2" required>
-            <label class="form-check-label" for="PrefStart-2">
-              Position 2
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-3" value="3" required>
-            <label class="form-check-label" for="PrefStart-3">
-              Position 3
-            </label>
-          </div>
-
-          <label class="form-check-label" for="CompatAuto-input">Compatible Autonomous</label>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="CompatAuto-input">
-          </div>
-
-        </div>
-        <div class="col">
-          <div class="row">
-            <div class="col">
-              <label for="DriveSkill-input" class="form-label">Driving Skill</label>
-              <input type="range" class="form-range" id="DriveSkill-input" min="1" max="5">
-            </div>
-            <div class="col">
-              <label for="Aggression-input" class="form-label">Aggression</label>
-              <input type="range" class="form-range" id="Aggression-input" min="1" max="5">
+          <div class="col">
+            <label for="TeamNumber-input" class="form-label">Team Number</label>
+            <input type="number" class="form-control" id="TeamNumber-input" min="1" required>
+            <div class="invalid-feedback">
+              Please set the team number.
             </div>
           </div>
 
-          <div class="row">
-            <div class="col">
-              <label for="PrefDrive-input" class="form-label">Preferred Driving Area</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-1" value="1" required>
-                <label class="form-check-label" for="PrefDrive-1">
-                  Near
-                </label>
+          <div class="col">
+            <label for="TeamName-input" class="form-label">Team Name</label>
+            <input type="text" class="form-control" id="TeamName-input">
+          </div>
+
+          <div class="col">
+            <label for="Match-input" class="form-label">Match</label>
+            <input type="number" class="form-control" id="Match-input" min="1" required>
+            <div class="invalid-feedback">
+              Please set the match number.
+            </div>
+          </div>
+
+        </div><!-- /.row -->
+
+        <hr class="mt-4 mb-1">
+
+        <div class="row">
+          <div class="col">
+
+            <label for="PrefStart-input" class="form-label">Starting Position</label>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-1" value="1" required>
+              <label class="form-check-label" for="PrefStart-1">
+                Position 1
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-2" value="2" required>
+              <label class="form-check-label" for="PrefStart-2">
+                Position 2
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="PrefStart-input" id="PrefStart-3" value="3" required>
+              <label class="form-check-label" for="PrefStart-3">
+                Position 3
+              </label>
+            </div>
+
+            <label class="form-check-label" for="CompatAuto-input">Compatible Autonomous</label>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="CompatAuto-input">
+            </div>
+
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <label for="DriveSkill-input" class="form-label">Driving Skill</label>
+                <input type="range" class="form-range" id="DriveSkill-input" min="1" max="5">
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-2" value="2" required>
-                <label class="form-check-label" for="PrefDrive-2">
-                  Mid
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-3" value="3" required>
-                <label class="form-check-label" for="PrefDrive-3">
-                  Far
-                </label>
+              <div class="col">
+                <label for="Aggression-input" class="form-label">Aggression</label>
+                <input type="range" class="form-range" id="Aggression-input" min="1" max="5">
               </div>
             </div>
-            <div class="col">
-              <label for="PrefScore-input" class="form-label">Preferred Scoring Area</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-1" value="1" required>
-                <label class="form-check-label" for="PrefScore-1">
-                  Close
-                </label>
+
+            <div class="row">
+              <div class="col">
+                <label for="PrefDrive-input" class="form-label">Preferred Driving Area</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-1" value="1" required>
+                  <label class="form-check-label" for="PrefDrive-1">
+                    Near
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-2" value="2" required>
+                  <label class="form-check-label" for="PrefDrive-2">
+                    Mid
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-3" value="3" required>
+                  <label class="form-check-label" for="PrefDrive-3">
+                    Far
+                  </label>
+                </div>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-2" value="2" required>
-                <label class="form-check-label" for="PrefScore-2">
-                  Medium
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-3" value="3" required>
-                <label class="form-check-label" for="PrefScore-3">
-                  Distant
-                </label>
+              <div class="col">
+                <label for="PrefScore-input" class="form-label">Preferred Scoring Area</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-1" value="1" required>
+                  <label class="form-check-label" for="PrefScore-1">
+                    Close
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-2" value="2" required>
+                  <label class="form-check-label" for="PrefScore-2">
+                    Medium
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-3" value="3" required>
+                  <label class="form-check-label" for="PrefScore-3">
+                    Distant
+                  </label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        <div class="col">
-          <div class="row">
-            <div class="col">
-              <label>Endgame</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-0" value="0" required>
-                <label class="form-check-label" for="Endgame-0">
-                  No climb
-                </label>
+          
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <label>Endgame</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-0" value="0" required>
+                  <label class="form-check-label" for="Endgame-0">
+                    No climb
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-1" value="6" required>
+                  <label class="form-check-label" for="Endgame-1">
+                    Low
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-2" value="8" required>
+                  <label class="form-check-label" for="Endgame-2">
+                    Mid
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-3" value="10" required>
+                  <label class="form-check-label" for="Endgame-3">
+                    High
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-4" value="15" required>
+                  <label class="form-check-label" for="Endgame-4">
+                    Traverse
+                  </label>
+                </div>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-1" value="6" required>
-                <label class="form-check-label" for="Endgame-1">
-                  Low
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-2" value="8" required>
-                <label class="form-check-label" for="Endgame-2">
-                  Mid
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-3" value="10" required>
-                <label class="form-check-label" for="Endgame-3">
-                  High
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="Endgame-input" id="Endgame-4" value="15" required>
-                <label class="form-check-label" for="Endgame-4">
-                  Traverse
-                </label>
+              <div class="col">
+
+                <label class="form-check-label" for="Outlier-input">Outlier</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="Outlier-input">
+                </div>
+                
+                <label class="form-check-label" for="BreakImpact-input">Break Impact</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="BreakImpact-input">
+                </div>
               </div>
             </div>
-            <div class="col">
+          </div>
+        </div><!-- /.row -->
 
-              <label class="form-check-label" for="Outlier-input">Outlier</label>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="Outlier-input">
-              </div>
-              
-              <label class="form-check-label" for="BreakImpact-input">Break Impact</label>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="BreakImpact-input">
-              </div>
+        <hr>
+
+        <div class="row align-items-center">
+          <div class="col">
+            <a class="btn btn-danger btn-huge form-control" href="javascript:changeValue($('#TargetsHigh-input'),-1)">-1</a>
+          </div>
+          <div class="col">
+            <label for="TargetsHigh-input" class="form-label">High Targets</label>
+            <input type="number" class="form-control" id="TargetsHigh-input" min="0" value="0" required>
+            <div class="invalid-feedback">
+              Please set how many points from the high target.
             </div>
           </div>
-        </div>
-      </div><!-- /.row -->
-
-      <hr>
-
-      <div class="row align-items-center">
-        <div class="col">
-          <a class="btn btn-danger btn-huge form-control" href="javascript:changeValue($('#TargetsHigh-input'),-1)">-1</a>
-        </div>
-        <div class="col">
-          <label for="TargetsHigh-input" class="form-label">High Targets</label>
-          <input type="number" class="form-control" id="TargetsHigh-input" min="0" value="0" required>
-          <div class="invalid-feedback">
-            Please set how many points from the high target.
+          <div class="col">
+              <a class="btn btn-success btn-huge form-control" href="javascript:changeValue($('#TargetsHigh-input'),1)">+1</a>
           </div>
-        </div>
-        <div class="col">
-            <a class="btn btn-success btn-huge form-control" href="javascript:changeValue($('#TargetsHigh-input'),1)">+1</a>
-        </div>
-      </div><!-- /.row -->
+        </div><!-- /.row -->
 
-      <hr>
+        <hr>
 
-      <div class="row align-items-center">
-        <div class="col">
-          <a class="btn btn-danger btn-huge form-control" href="javascript:changeValue($('#TargetsLow-input'),-1)">-1</a>
-        </div>
-        <div class="col">
-          <label for="TargetsLow-input" class="form-label">Low Targets</label>
-          <input type="number" class="form-control" id="TargetsLow-input" min="0" value="0" required>
-          <div class="invalid-feedback">
-            Please set how many points in the low target.
+        <div class="row align-items-center">
+          <div class="col">
+            <a class="btn btn-danger btn-huge form-control" href="javascript:changeValue($('#TargetsLow-input'),-1)">-1</a>
           </div>
-        </div>
-        <div class="col">
-            <a class="btn btn-success btn-huge form-control" href="javascript:changeValue($('#TargetsLow-input'),1)">+1</a>
-        </div>
-      </div><!-- /.row -->
+          <div class="col">
+            <label for="TargetsLow-input" class="form-label">Low Targets</label>
+            <input type="number" class="form-control" id="TargetsLow-input" min="0" value="0" required>
+            <div class="invalid-feedback">
+              Please set how many points in the low target.
+            </div>
+          </div>
+          <div class="col">
+              <a class="btn btn-success btn-huge form-control" href="javascript:changeValue($('#TargetsLow-input'),1)">+1</a>
+          </div>
+        </div><!-- /.row -->
 
-      <hr>
+        <hr>
 
-      <div class="row">
-        <div class="col">
-          <label class="form-label" for="Comment-input">Comment</label>
-          <textarea class="form-control" id="Comment-input" rows="6"></textarea>
-        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="Comment-input">Comment</label>
+            <textarea class="form-control" id="Comment-input" rows="6"></textarea>
+          </div>
 
-        <div class="col text-center">
-          <a href="javascript:updateQR()" class="btn btn-primary form-control" style="margin-top: 2.5rem;">Get Code</a>
-          <div id="qrcode"></div>
-        </div>
-      </div><!-- /.row -->
+          <div class="col text-center">
+            <a href="javascript:updateQR()" class="btn btn-primary form-control" style="margin-top: 2.5rem;">Get Code</a>
+            <div id="qrcode"></div>
+          </div>
+        </div><!-- /.row -->
 
-    </div><!-- /.container-->
+      </div><!-- /.container-->
+    </form>
 
     <script type="text/javascript">
       function changeValue(ctl,val) {
