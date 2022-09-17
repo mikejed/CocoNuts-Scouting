@@ -1,9 +1,9 @@
 const cacheName = "CocoNutsScouting";
 const precacheResources = [
-    "/CocoNuts-Scouting/Data%20Entry/scoring-sheet.html",
-    "/CocoNuts-Scouting/Data%20Entry/qrcode.min.js",
-    "/CocoNuts-Scouting/Data%20Entry/bootstrap.min.css",
-    "/CocoNuts-Scouting/Data%20Entry/jquery-3.6.1.min.js"
+    "/CocoNuts-Scouting/index.html",
+    "/CocoNuts-Scouting/Assets/qrcode.min.js",
+    "/CocoNuts-Scouting/Assets/bootstrap.min.css",
+    "/CocoNuts-Scouting/Assets/jquery-3.6.1.min.js"
 ];
 
 // When the service worker is installing, open the cache and add the precache resources to it
