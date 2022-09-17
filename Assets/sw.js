@@ -1,6 +1,6 @@
 const cacheName = "CocoNutsScouting";
 const precacheResources = [
-    "/",
+    "/CocoNuts-Scouting/",
     "/CocoNuts-Scouting/index.html",
     "/CocoNuts-Scouting/Assets/qrcode.min.js",
     "/CocoNuts-Scouting/Assets/bootstrap.min.css",
