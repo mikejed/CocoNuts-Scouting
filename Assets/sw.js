@@ -22,7 +22,7 @@ self.addEventListener('activate', event => {
 
 // When there's an incoming fetch request, try and respond with a precached resource, otherwise fall back to the network
 self.addEventListener('fetch', event => {
-  event.respondWith((async () => {
+  event.respondWith(async () => {
     const cache = await caches.open(cacheName);
 
     // Try the cache first.
@@ -35,4 +35,4 @@ self.addEventListener('fetch', event => {
       return fetch(event.request);
     }
   }
-});
+)});
