@@ -4,6 +4,7 @@ const precacheResources = [
     "/CocoNuts-Scouting/index.html",
     "/CocoNuts-Scouting/Assets/qrcode.min.js",
     "/CocoNuts-Scouting/Assets/bootstrap.min.css",
+    "/CocoNuts-Scouting/Assets/bootstrap.min.css.map",
     "/CocoNuts-Scouting/Assets/jquery-3.6.1.min.js"
 ];
 
