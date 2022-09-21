@@ -117,23 +117,23 @@
 
             <div class="row">
               <div class="col">
-                <label for="PrefDrive-input" class="form-label">Preferred Driving Area</label>
+                <label for="CycleTime-input" class="form-label">Cycle Time</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-1" value="1" required>
-                  <label class="form-check-label" for="PrefDrive-1">
-                    Near
+                  <input class="form-check-input" type="radio" name="CycleTime-input" id="CycleTime-1" value="1" required>
+                  <label class="form-check-label" for="CycleTime-1">
+                    Slow
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-2" value="2" required>
-                  <label class="form-check-label" for="PrefDrive-2">
-                    Mid
+                  <input class="form-check-input" type="radio" name="CycleTime-input" id="CycleTime-2" value="2" required>
+                  <label class="form-check-label" for="CycleTime-2">
+                    Avg
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="PrefDrive-input" id="PrefDrive-3" value="3" required>
-                  <label class="form-check-label" for="PrefDrive-3">
-                    Far
+                  <input class="form-check-input" type="radio" name="CycleTime-input" id="CycleTime-3" value="3" required>
+                  <label class="form-check-label" for="CycleTime-3">
+                    Fast
                   </label>
                 </div>
               </div>
@@ -207,6 +207,11 @@
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="BreakImpact-input">
                 </div>
+                
+                <label class="form-check-label" for="DefenseOnly-input">Defense Only</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="DefenseOnly-input">
+                </div>
               </div>
             </div>
           </div>
@@ -273,19 +278,20 @@
       function updateQR() {
         $('body').addClass('was-validated');
         $("#qrcode").html(""); // clear the QR div's previous content
-        if ($('#TeamNumber-input:valid').length > 0 && $('#Match-input:valid').length > 0 && $("input[Name='PrefStart-input']:valid").length > 0 && $("input[Name='PrefDrive-input']:valid").length > 0 && $("input[Name='PrefScore-input']:valid").length > 0 && $("input[Name='Endgame-input']:valid").length > 0 ) {
+        if ($('#TeamNumber-input:valid').length > 0 && $('#Match-input:valid').length > 0 && $("input[Name='PrefStart-input']:valid").length > 0 && $("input[Name='CycleTime-input']:valid").length > 0 && $("input[Name='PrefScore-input']:valid").length > 0 && $("input[Name='Endgame-input']:valid").length > 0 ) {
           var data= '{'
                   + '"TeamNumber":'   + JSON.stringify($("#TeamNumber-input").val())
                   + ',"TeamName":'    + JSON.stringify($("#TeamName-input").val())
                   + ',"Match":'       + JSON.stringify($("#Match-input").val())           // TODO: add option for interview data
                   + ',"PrefStart":'   + JSON.stringify($("input[name='PrefStart-input']:checked").val())
-                  + ',"PrefDrive":'   + JSON.stringify($("input[name='PrefDrive-input']:checked").val())
+                  + ',"CycleTime":'   + JSON.stringify($("input[name='CycleTime-input']:checked").val())
                   + ',"PrefScore":'   + JSON.stringify($("input[name='PrefScore-input']:checked").val())
                   + ',"CompatAuto":'  + JSON.stringify(Number($("#CompatAuto-input").is(":checked")))
                   + ',"DriveSkill":'  + JSON.stringify($("#DriveSkill-input").val())
                   + ',"Aggression":'  + JSON.stringify($("#Aggression-input").val())
                   + ',"Outlier":'     + JSON.stringify(Number($("#Outlier-input").is(":checked")))
                   + ',"BreakImpact":' + JSON.stringify(Number($("#BreakImpact-input").is(":checked")))
+                  + ',"DefenseOnly":' + JSON.stringify(Number($("#DefenseOnly-input").is(":checked")))
                   + ',"TargetsHigh":' + JSON.stringify($("#TargetsHigh-input").val())
                   + ',"TargetsLow":'  + JSON.stringify($("#TargetsLow-input").val())
                   + ',"Endgame":'     + JSON.stringify($("input[name='Endgame-input']:checked").val())

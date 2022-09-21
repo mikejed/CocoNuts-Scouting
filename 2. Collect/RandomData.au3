@@ -31,7 +31,7 @@ Local $aResult, $iRows, $iCols
 If $iCols < 1 Or $aResult[1][0] < 20220902.1 Then
 	ConsoleWrite("New Database" & @CRLF)
 	_SQLite_Exec(-1, "CREATE TABLE [__MigrationHistory] ([Id], [Name], [Version])")
-	_SQLite_Exec(-1, "CREATE TABLE [Matches] ([TeamNumber], [Match], [PrefStart], [PrefDrive], [PrefScore], [CompatAuto], [DriveSkill], [TargetsHigh], [TargetsLow], [Endgame], [Aggression], [Outlier], [BreakImpact], [Comment])")
+	_SQLite_Exec(-1, "CREATE TABLE [Matches] ([TeamNumber], [Match], [PrefStart], [CycleTime], [DefenseOnly], [PrefScore], [CompatAuto], [DriveSkill], [TargetsHigh], [TargetsLow], [Endgame], [Aggression], [Outlier], [BreakImpact], [Comment])")
 	_SQLite_Exec(-1, "INSERT INTO [__MigrationHistory] ([Id], [Name], [Version]) VALUES (20220902.1, 'CreateDatabase', '1.0')")
 	_SQLite_Exec(-1, "CREATE TABLE [Teams] ([TeamNumber], [TeamName])")
 Else
@@ -57,7 +57,8 @@ For $round = 1 To 28 Step 1
 						"[TeamNumber]" & _
 						", [Match]" & _
 						", [PrefStart]" & _
-						", [PrefDrive]" & _
+						", [CycleTime]" & _
+						", [DefenseOnly]" & _
 						", [PrefScore]" & _
 						", [CompatAuto]" & _
 						", [DriveSkill]" & _
@@ -74,6 +75,7 @@ For $round = 1 To 28 Step 1
 						", " & $round & _
 						", '" & Random(1,3,1) & "'" & _
 						", '" & Random(1,3,1) & "'" & _
+						", '" & Random(0,1,1) & "'" & _
 						", '" & Random(1,3,1) & "'" & _
 						", '" & Random(0,1,1) & "'" & _
 						", '" & Random(1,5,1) & "'" & _

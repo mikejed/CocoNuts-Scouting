@@ -1,8 +1,19 @@
+#Region ;**** Directives created by AutoIt3Wrapper_GUI ****
+#AutoIt3Wrapper_Icon=../favicon.ico
+#AutoIt3Wrapper_Res_ProductName=CocoNuts Data Scanner
+#AutoIt3Wrapper_Res_ProductVersion=1.1
+#AutoIt3Wrapper_Res_LegalCopyright=2022 by Michael Garrison
+#AutoIt3Wrapper_Res_Language=1033
+#EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
+
+; Compiled using AutoIt v3.3.16.0
+
 #include <includes\Json.au3>
 #include <SQLite.au3>
 
 #include <EditConstants.au3>
 #include <GuiListView.au3>
+#include <GUIConstants.au3>
 
 FileInstall("includes\SQLite3.dll", @TempDir & "\SQLite3.dll")
 
@@ -14,7 +25,8 @@ If Not FileExists($sColListPath) Then
 	If MsgBox(1, "Columns not found", "File DataList.txt not found - click OK to create a default file or cancel to exit" & @CRLF & @CRLF &"(Team Number, Team Name, Match, and Comment will always be included)") = 2 Then Exit
 	$hColList = FileOpen($sColListPath,2)
 	FileWriteLine($hColList,"PrefStart")
-	FileWriteLine($hColList,"PrefDrive")
+	FileWriteLine($hColList,"CycleTime")
+	FileWriteLine($hColList,"DefenseOnly")
 	FileWriteLine($hColList,"PrefScore")
 	FileWriteLine($hColList,"CompatAuto")
 	FileWriteLine($hColList,"DriveSkill")
@@ -44,9 +56,12 @@ Global $hNewMenu = GUICtrlCreateMenuItem("New", $hFileMenu)
 Global $hOpenMenu = GUICtrlCreateMenuItem("Open", $hFileMenu)
 
 Global $hMatchList = GUICtrlCreateListView("Team|Match|Comment", 0, 0, 320, 140)
+GUICtrlSetState($hMatchList, $GUI_DISABLE)
 Global $hDeleteMatchRow = GUICtrlCreateButton("(delete selected)", 0, 140, 100, 20)
+GUICtrlSetState($hDeleteMatchRow, $GUI_DISABLE)
 
-Global $hAddDataButton = GUICtrlCreateButton("Add new match data >", 80, 170, 170, 40)
+Global $hAddDataButton = GUICtrlCreateButton("Open or create a database" & @CRLF & "file to add data", 80, 170, 170, 40, $BS_MULTILINE)
+GUICtrlSetState($hAddDataButton, $GUI_DISABLE)
 
 Global $hStatusBar = GUICtrlCreateLabel("  No file open", 0, 220, 320, 20)
 GUICtrlSetBkColor(-1, 0xFFFFFF)
@@ -81,7 +96,7 @@ While 1
 			; Now that the tables exist, add all of the dynamic columns to [Matches].
 			UpdateMatchColumnList()
 
-			; Indicate the file path of the new database in the status bar.
+			; Indicate the file path of the new database in the status bar. This also enables the controls now that a file is open.
 			SetStatusBar($sNewDbPath)
 
 			; Show list of matches. Should be blank, but better safe than sorry.
@@ -195,9 +210,10 @@ While 1
 							; Now run the query to store the data.
 							_SQLite_Exec(-1, $sQuery)
 						EndIf
-						ExitLoop
 
 						UpdateMatchRowList()
+
+						ExitLoop
 
 				EndSwitch
 			WEnd
@@ -222,6 +238,12 @@ Func SetStatusBar($_sText)
 		$_sText = "...\" & StringTrimLeft($_sText, StringInStr($_sText,"\"))
 	EndIf
 	GUICtrlSetData($hStatusBar, $_sText)
+
+	; Since a file is now open, make sure the controls are enabled.
+	GUICtrlSetData($hAddDataButton, "Add new match data >")
+	GUICtrlSetState($hMatchList, $GUI_ENABLE)
+	GUICtrlSetState($hDeleteMatchRow, $GUI_ENABLE)
+	GUICtrlSetState($hAddDataButton, $GUI_ENABLE)
 EndFunc
 
 ; Function to loop through the custom columns and see if they already exist in [Matches] table. If not, add them.
