@@ -168,8 +168,14 @@ While 1
 						ExitLoop
 
 					Case $h_NewDataSubmit ; Data entered - now digest the data and enter it into the database. Extra data (not indicated by custom column file) is ignored.
+
 						$s_Input = Json_Decode(StringStripCR(GUICtrlRead($h_NewDataInput)))
-						GUISetState(@SW_HIDE, $h_NewDataGui)
+						GUIDelete($h_NewDataGui)
+
+						If UBound(Json_ObjGetKeys($s_Input)) - 4 <> UBound($aColList) Then
+							MsgBox(16, "Error", "The data doesn't seem to be formatted correctly. Maybe try scanning again?")
+							ExitLoop
+						EndIf
 
 						Local $sTeamNumber	= GetEscapedJson($s_Input, 'TeamNumber')
 						Local $sTeamName 	= GetEscapedJson($s_Input, 'TeamName')
