@@ -22,10 +22,10 @@ self.addEventListener('fetch', (event) => {
     if (r) { return r; }
 
     // cache the new resource and return it
-    const response = await fetch(e.request);
+    const response = await fetch(event.request);
     const cache = await caches.open(cacheName);
 
-    cache.put(e.request, response.clone());
+    cache.put(event.request, response.clone());
     return response;
   })());
 });
