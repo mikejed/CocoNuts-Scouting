@@ -75,7 +75,6 @@
 
         <div class="row">
           <div class="col">
-            
             <label for="PrefScore-input" class="form-label">Preferred Scoring Area</label>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="PrefScore-input" id="PrefScore-1" value="Fender" required>
@@ -179,7 +178,7 @@
 
             <div class="row">
               <div class="form-check">
-                <label for="ClimbStart-input" class="form-label">Climb Start Seconds</label>
+                <label for="ClimbStart-input">Climb Start Seconds</label>
                 <input type="text" class="form-control" id="ClimbStart-input" required>
                 <div class="invalid-feedback">
                   Please set the time they started the climb
@@ -250,24 +249,16 @@
       function updateQR() {
         $('body').addClass('was-validated');
         $("#qrcode").html(""); // clear the QR div's previous content
-        if ($('#TeamNumber-input:valid').length > 0 && $('#Match-input:valid').length > 0 && $("input[Name='PrefStart-input']:valid").length > 0 && $("input[Name='CycleTime-input']:valid").length > 0 && $("input[Name='PrefScore-input']:valid").length > 0 && $("input[Name='Endgame-input']:valid").length > 0 ) {
+        if ($('#TeamNumber-input:valid').length > 0 && $('#Match-input:valid').length > 0 && $("input[Name='PrefScore-input']:valid").length > 0 && $("input[Name='Endgame-input']:valid").length > 0 ) {
           var data= '{'
                   + '"TeamNumber":'   + JSON.stringify($("#TeamNumber-input").val())
                   + ',"TeamName":'    + JSON.stringify($("#TeamName-input").val())
                   + ',"Match":'       + JSON.stringify($("#Match-input").val())
-                  // + ',"PrefStart":'   + JSON.stringify($("input[name='PrefStart-input']:checked").val())
                   + ',"PrefScore":'   + JSON.stringify($("input[name='PrefScore-input']:checked").val())
-                  + ',"Collect":'   + JSON.stringify($("input[name='Collect-input']:checked").val())
-                  // + ',"CycleTime":'   + JSON.stringify($("input[name='CycleTime-input']:checked").val())
-                  // + ',"PrefScore":'   + JSON.stringify($("input[name='PrefScore-input']:checked").val())
-                  // + ',"CompatAuto":'  + JSON.stringify(Number($("#CompatAuto-input").is(":checked")))
-                  // + ',"DriveSkill":'  + JSON.stringify($("#DriveSkill-input").val())
-                  // + ',"Aggression":'  + JSON.stringify($("#Aggression-input").val())
-                  // + ',"Outlier":'     + JSON.stringify(Number($("#Outlier-input").is(":checked")))
-                  // + ',"BreakImpact":' + JSON.stringify(Number($("#BreakImpact-input").is(":checked")))
-                  // + ',"DefenseOnly":' + JSON.stringify(Number($("#DefenseOnly-input").is(":checked")))
+                  + ',"ClimbStart":'  + JSON.stringify($("#ClimbStart-input").val())
+                  + ',"Collect":'     + JSON.stringify($("input[name='Collect-input']:checked").val())
                   + ',"TargetsAuto":' + JSON.stringify($("#TargetsAuto-input").val())
-                  + ',"TargetsTele":'  + JSON.stringify($("#TargetsTele-input").val())
+                  + ',"TargetsTele":' + JSON.stringify($("#TargetsTele-input").val())
                   + ',"Endgame":'     + JSON.stringify($("input[name='Endgame-input']:checked").val())
                   + ',"Comment":'     + JSON.stringify($("#Comment-input").val())
                   + '}';
