@@ -1,4 +1,4 @@
-const cacheName = "CocoNutsScouting-2023-01-30-2";
+const cacheName = "CocoNutsScouting_2023-01-30_3";
 const precacheResources = [
     "/CocoNuts-Scouting/",
     "/CocoNuts-Scouting/index.html",
