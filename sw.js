@@ -2,10 +2,10 @@ const cacheName = "CocoNutsScouting";
 const precacheResources = [
     "/CocoNuts-Scouting/",
     "/CocoNuts-Scouting/index.html",
-    "/CocoNuts-Scouting/qrcode.min.js",
-    "/CocoNuts-Scouting/bootstrap.min.css",
-    "/CocoNuts-Scouting/bootstrap.min.css.map",
-    "/CocoNuts-Scouting/jquery-3.6.1.min.js"
+    "/CocoNuts-Scouting/assets/qrcode.min.js",
+    "/CocoNuts-Scouting/assets/bootstrap.min.css",
+    "/CocoNuts-Scouting/assets/bootstrap.min.css.map",
+    "/CocoNuts-Scouting/assets/jquery-3.6.1.min.js"
 ];
 
 self.addEventListener('install', (event) => {
