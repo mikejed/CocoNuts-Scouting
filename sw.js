@@ -1,4 +1,4 @@
-const cacheName = "CocoNutsScouting-2023-01-30-1";
+const cacheName = "CocoNutsScouting-2023-01-30-2";
 const precacheResources = [
     "/CocoNuts-Scouting/",
     "/CocoNuts-Scouting/index.html",
@@ -7,6 +7,12 @@ const precacheResources = [
     "/CocoNuts-Scouting/assets/bootstrap.min.css.map",
     "/CocoNuts-Scouting/assets/jquery-3.6.1.min.js"
 ];
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+  .register("sw.js")
+  .then(() => console.log("Successfully registered service worker"));
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
@@ -22,10 +28,10 @@ self.addEventListener('fetch', (event) => {
     if (r) { return r; }
 
     // cache the new resource and return it
-    const response = await fetch(e.request);
+    const response = await fetch(event.request);
     const cache = await caches.open(cacheName);
 
-    cache.put(e.request, response.clone());
+    cache.put(event.request, response.clone());
     return response;
   })());
 });

@@ -4,6 +4,7 @@
     <title>2486 - Coconuts Scouting</title>
     <script src="assets/jquery-3.6.1.min.js"></script>
     <script src="assets/qrcode.min.js"></script>
+    <script src="sw.js"></script>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <style>
       body {
@@ -30,13 +31,6 @@
         margin: 2rem 0rem;
       }
     </style>
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-        .register("sw.js")
-        .then(() => console.log("Successfully registered service worker"));
-      }
-    </script>
   </head>
   <body>
     <form>
