@@ -35,3 +35,17 @@ self.addEventListener('fetch', (event) => {
     return response;
   })());
 });
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheList => {
+      return Promise.all(
+        cacheList.filter(thisCache => {
+          return thisCache.startsWith('CocoNutsScouting_') && thisCache !== cacheName;
+        }).map(thisCache => {
+          return caches.delete(thisCache);
+        })
+      );
+    })
+  );
+});
