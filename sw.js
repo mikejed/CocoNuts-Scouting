@@ -1,4 +1,4 @@
-const cacheName = "CocoNutsScouting_2023-02-18_0";
+const cacheName = "CocoNutsScouting_2023-02-18_1";
 const precacheResources = [
     "/CocoNuts-Scouting/",
     "/CocoNuts-Scouting/index.html",
@@ -34,4 +34,18 @@ self.addEventListener('fetch', (event) => {
     cache.put(event.request, response.clone());
     return response;
   })());
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheList => {
+      return Promise.all(
+        cacheList.filter(thisCache => {
+          return thisCache.startsWith('CocoNutsScouting_') && thisCache !== cacheName;
+        }).map(thisCache => {
+          return caches.delete(thisCache);
+        })
+      );
+    })
+  );
 });
