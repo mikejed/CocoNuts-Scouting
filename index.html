@@ -46,6 +46,7 @@
             <label for="TeamNumber-input" class="form-label">Team Number</label>
             <select class="form-control" id="TeamNumber-input" required onchange="$('#TeamName-input').val(this.options[this.selectedIndex].dataset.teamname);">
               <option disabled selected value="">(select team)</option>
+              <!-- Change team numbers here -->
               <option value="2486" data-teamname="CocoNuts">2486</option>
               <option value="1410" data-teamname="Kraken">1410</option>
             </select>
