@@ -379,7 +379,7 @@
                   + ',"Comment":'       + JSON.stringify($("#Comment-input").val())
                   + ',"PiecePref":'    + JSON.stringify($("#PiecePref").val())
                   + '}';
-          new QRCode(document.getElementById("qrcode"), {text:data,width:480,height:480});
+          new QRCode(document.getElementById("qrcode"), {text:data,width:480,height:480,correctLevel:QRCode.CorrectLevel.L});
         }
       }
     </script>
