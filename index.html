@@ -296,7 +296,7 @@
                   + ',"Endgame":'     + JSON.stringify($("input[name='Endgame-input']:checked").val())
                   + ',"Comment":'     + JSON.stringify($("#Comment-input").val())
                   + '}';
-          new QRCode(document.getElementById("qrcode"), {text:data,width:480,height:480});
+          new QRCode(document.getElementById("qrcode"), {text:data,width:480,height:480,correctLevel:QRCode.CorrectLevel.L});
         }
       }
     </script>
