@@ -110,7 +110,7 @@ While 1
 				ContinueLoop
 			EndIf
 
-			If StringLen(GUICtrlRead($hNewDataInput)) < 2 Or StringStripWS(StringLeft(GuiCtrlRead($hNewDataInput),1),3) <> '{' Or StringStripWS(StringRight(GuiCtrlRead($hNewDataInput),1),3) <> '}' Then
+			If StringLen(GUICtrlRead($hNewDataInput)) < 2 Or StringLeft(StringStripWS(GuiCtrlRead($hNewDataInput),3),1) <> '{' Or StringRight(StringStripWS(GuiCtrlRead($hNewDataInput),3),1) <> '}' Then
 				MsgBox(16, "Error", "Make sure you've scanned information into the text field 😅")
 				ContinueLoop
 			EndIf
