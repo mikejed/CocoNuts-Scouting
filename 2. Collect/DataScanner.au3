@@ -1,7 +1,7 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
 #AutoIt3Wrapper_Icon=../favicon.ico
 #AutoIt3Wrapper_Res_ProductName=CocoNuts Data Scanner
-#AutoIt3Wrapper_Res_ProductVersion=2.1
+#AutoIt3Wrapper_Res_ProductVersion=2.2
 #AutoIt3Wrapper_Res_LegalCopyright=2024 by Michael Garrison
 #AutoIt3Wrapper_Res_Language=1033
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
@@ -110,13 +110,13 @@ While 1
 				ContinueLoop
 			EndIf
 
-			If StringLen(GUICtrlRead($hNewDataInput)) < 2 Or StringLeft(GuiCtrlRead($hNewDataInput),1) <> '{' Or StringRight(GuiCtrlRead($hNewDataInput),1) <> '}' Then
+			If StringLen(GUICtrlRead($hNewDataInput)) < 2 Or StringStripWS(StringLeft(GuiCtrlRead($hNewDataInput),1),3) <> '{' Or StringStripWS(StringRight(GuiCtrlRead($hNewDataInput),1),3) <> '}' Then
 				MsgBox(16, "Error", "Make sure you've scanned information into the text field 😅")
 				ContinueLoop
 			EndIf
 
 			; Data entered - now digest the data and add it to the file. Extra data (not indicated by custom column file) is ignored.
-			$s_Input = Json_Decode(StringStripCR(GUICtrlRead($hNewDataInput)))
+			$s_Input = Json_Decode(StringStripWS(GUICtrlRead($hNewDataInput),3))
 
 			If UBound(Json_ObjGetKeys($s_Input)) - 3 <> UBound($aColList) Then
 				MsgBox(16, "Error", "The data doesn't seem to be formatted correctly. Maybe try scanning again?")
