@@ -1,7 +1,7 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
 #AutoIt3Wrapper_Icon=../favicon.ico
 #AutoIt3Wrapper_Res_ProductName=CocoNuts Data Scanner
-#AutoIt3Wrapper_Res_ProductVersion=2.2
+#AutoIt3Wrapper_Res_ProductVersion=2.1
 #AutoIt3Wrapper_Res_LegalCopyright=2024 by Michael Garrison
 #AutoIt3Wrapper_Res_Language=1033
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
